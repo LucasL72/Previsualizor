@@ -2,7 +2,7 @@
 
 **Prévisualisation de publications pour les réseaux sociaux** — une application
 React + Vite + Tailwind CSS qui simule en temps réel le rendu natif d'un post
-sur **Facebook, Instagram, LinkedIn, Google My Business et X (ex-Twitter)**.
+sur **Facebook, Instagram, LinkedIn, Google Business Profile et X (ex-Twitter)**.
 
 Saisissez votre texte, déposez une image, et visualisez immédiatement le résultat
 au bon format pour chaque plateforme, avec compteur de caractères, contrôle des
@@ -24,6 +24,8 @@ dimensions d'image et mode sombre.
   - 70 → 90 % : orange
   - 90 → 100 % : rouge
   - au-delà : rouge gras + nombre de caractères en trop (négatif)
+  - indication du **seuil de troncature** (« le pli ») : nombre de caractères
+    visibles avant le bouton « voir plus » selon la plateforme
 - **Upload d'image** par glisser-déposer ou par clic (lecture via `FileReader`).
 - **Badge d'avertissement** si les dimensions de l'image ne correspondent pas
   aux specs de la plateforme + **repère de ratio** en superposition.
@@ -35,20 +37,27 @@ dimensions d'image et mode sombre.
 - **Mode sombre** via les classes `dark` de Tailwind, préférence stockée dans le
   `localStorage` et détection initiale via `prefers-color-scheme`.
 
-### Specs intégrées
+### Specs intégrées (mise à jour 2026)
 
-| Plateforme         | Format         | Largeur | Hauteur | Caractères max |
-| ------------------ | -------------- | ------- | ------- | -------------- |
-| Facebook           | Post           | 1200    | 630     | 63 206         |
-| Facebook           | Story          | 1080    | 1920    | 63 206         |
-| Instagram          | Feed Square    | 1080    | 1080    | 2 200          |
-| Instagram          | Feed Portrait  | 1080    | 1350    | 2 200          |
-| Instagram          | Story          | 1080    | 1920    | 2 200          |
-| LinkedIn           | Post           | 1200    | 627     | 3 000          |
-| LinkedIn           | Article        | 744     | libre   | 125 000        |
-| Google My Business | Post           | 720     | 540     | 1 500          |
-| X (ex-Twitter)     | Post           | 1600    | 900     | 280            |
-| X (ex-Twitter)     | Thread / tweet | 1600    | 900     | 280            |
+| Plateforme                | Format            | Dimensions | Ratio  | Caractères max | Visibles |
+| ------------------------- | ----------------- | ---------- | ------ | -------------- | -------- |
+| Facebook                  | ⭐ Portrait        | 1080×1350  | 4:5    | 63 206         | 125      |
+| Facebook                  | Carré             | 1080×1080  | 1:1    | 63 206         | 125      |
+| Facebook                  | Paysage           | 1200×630   | 1.91:1 | 63 206         | 125      |
+| Facebook                  | Story / Reel      | 1080×1920  | 9:16   | 63 206         | 125      |
+| Instagram                 | ⭐ Portrait        | 1080×1350  | 4:5    | 2 200          | 125      |
+| Instagram                 | Carré             | 1080×1080  | 1:1    | 2 200          | 125      |
+| Instagram                 | Paysage           | 1200×628   | 1.91:1 | 2 200          | 125      |
+| Instagram                 | Story / Reel      | 1080×1920  | 9:16   | 2 200          | 125      |
+| LinkedIn                  | ⭐ Image simple    | 1200×627   | 1.91:1 | 3 000          | 210      |
+| LinkedIn                  | Carré             | 1080×1080  | 1:1    | 3 000          | 210      |
+| LinkedIn                  | Carrousel PDF     | 1080×1080  | 1:1    | 3 000          | 210      |
+| Google Business Profile   | ⭐ Photo de post   | 1200×900   | 4:3    | 1 500          | 100      |
+| X                         | ⭐ Image dans fil  | 1200×675   | 16:9   | 280            | —        |
+
+> **Caractères visibles** = nombre de caractères affichés avant troncature
+> (« le pli ») : placez votre message clé au début. Détails et conseils
+> (hashtags, titre GMB, URL X = 23 car., etc.) dans le panneau de specs de l'app.
 
 Les valeurs sont centralisées dans [`src/config/platforms.js`](src/config/platforms.js).
 

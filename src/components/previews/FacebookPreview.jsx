@@ -31,7 +31,7 @@ export default function FacebookPreview({ draft, format }) {
       {/* Texte */}
       {draft.text && (
         <div className="px-3 pb-2 text-sm text-gray-800 dark:text-gray-200">
-          <TruncatedText text={draft.text} lines={3} />
+          <TruncatedText text={draft.text} foldChars={format.visibleChars} />
         </div>
       )}
 

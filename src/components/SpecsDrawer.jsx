@@ -40,14 +40,16 @@ export default function SpecsDrawer({ open, onToggle }) {
           style={{ maxHeight: 'calc(75vh - 3rem)' }}
         >
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+            <table className="w-full min-w-[760px] border-collapse text-left text-sm">
               <thead>
                 <tr className="border-b border-gray-200 text-xs uppercase tracking-wide text-gray-400 dark:border-gray-700">
                   <th className="py-2 pr-4">Plateforme</th>
                   <th className="py-2 pr-4">Format</th>
                   <th className="py-2 pr-4">Largeur</th>
                   <th className="py-2 pr-4">Hauteur</th>
+                  <th className="py-2 pr-4">Ratio</th>
                   <th className="py-2 pr-4">Caractères max</th>
+                  <th className="py-2 pr-4">Visibles</th>
                 </tr>
               </thead>
               <tbody>
@@ -72,13 +74,22 @@ export default function SpecsDrawer({ open, onToggle }) {
                           </span>
                         )}
                       </td>
-                      <td className="py-2 pr-4">{f.name}</td>
+                      <td className="py-2 pr-4">
+                        {f.recommended && <span className="mr-1">⭐</span>}
+                        {f.name}
+                      </td>
                       <td className="py-2 pr-4 tabular-nums">{f.width} px</td>
                       <td className="py-2 pr-4 tabular-nums">
                         {f.height ? `${f.height} px` : 'Libre'}
                       </td>
+                      <td className="py-2 pr-4 tabular-nums">{f.ratioLabel}</td>
                       <td className="py-2 pr-4 tabular-nums">
                         {f.maxChars.toLocaleString('fr-FR')}
+                      </td>
+                      <td className="py-2 pr-4 tabular-nums">
+                        {f.visibleChars < f.maxChars
+                          ? f.visibleChars.toLocaleString('fr-FR')
+                          : '—'}
                       </td>
                     </tr>
                   ))
@@ -106,7 +117,16 @@ export default function SpecsDrawer({ open, onToggle }) {
                   {p.name}
                 </p>
                 <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
+                  <span className="font-medium text-gray-600 dark:text-gray-300">
+                    Image :{' '}
+                  </span>
                   {p.imageNote}
+                </p>
+                <p className="mt-1.5 text-xs text-gray-500 dark:text-gray-400">
+                  <span className="font-medium text-gray-600 dark:text-gray-300">
+                    Texte :{' '}
+                  </span>
+                  {p.charNote}
                 </p>
               </div>
             ))}

@@ -55,11 +55,9 @@ export default function PlatformTabs({
                     : 'bg-gray-100 text-gray-500 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700'
                 }`}
               >
+                {f.recommended && <span className="mr-1">⭐</span>}
                 {f.name}
-                <span className="ml-1.5 opacity-60">
-                  {f.width}
-                  {f.height ? `×${f.height}` : '×libre'}
-                </span>
+                <span className="ml-1.5 opacity-60">{f.ratioLabel}</span>
               </button>
             );
           })}

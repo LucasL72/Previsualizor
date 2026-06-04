@@ -15,20 +15,14 @@ function Metric({ icon, value }) {
 
 /**
  * Carte X — claire ou sombre selon le mode global (classes `dark:`).
- * Pour un thread, on affiche un trait de continuité sous l'avatar.
  */
 export default function XPreview({ draft, format }) {
-  const isThread = format.id === 'thread';
-
   return (
     <div className="mx-auto w-full max-w-[500px] rounded-2xl border border-gray-200 bg-white p-4 dark:border-gray-800 dark:bg-black">
       <div className="flex gap-3">
-        {/* Avatar + éventuel fil de thread */}
+        {/* Avatar */}
         <div className="flex flex-col items-center">
           <div className="h-11 w-11 shrink-0 rounded-full bg-gray-300 dark:bg-gray-700" />
-          {isThread && (
-            <div className="mt-1 w-0.5 flex-1 bg-gray-200 dark:bg-gray-700" />
-          )}
         </div>
 
         <div className="min-w-0 flex-1">

@@ -5,8 +5,11 @@
  *  - 70 → 90 %   : orange
  *  - 90 → 100 %  : rouge
  *  - > 100 %     : rouge gras + nombre de caractères en trop (négatif)
+ *
+ * Si `visible` est fourni (et inférieur à `max`), on indique le seuil de
+ * troncature (« le pli ») : caractères affichés avant le bouton « voir plus ».
  */
-export default function CharCounter({ count, max }) {
+export default function CharCounter({ count, max, visible = null }) {
   const ratio = max > 0 ? count / max : 0;
   const remaining = max - count;
   const over = remaining < 0;
@@ -19,30 +22,41 @@ export default function CharCounter({ count, max }) {
   if (ratio >= 0.9) barClass = 'bg-red-500';
   else if (ratio >= 0.7) barClass = 'bg-orange-500';
 
+  const hasFold = visible != null && visible < max;
+  const pastFold = hasFold && count > visible;
+
   return (
-    <div className="flex items-center gap-3">
-      <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
-        <div
-          className={`h-full rounded-full transition-all duration-200 ${barClass}`}
-          style={{ width: `${Math.min(ratio, 1) * 100}%` }}
-        />
+    <div className="space-y-1">
+      <div className="flex items-center gap-3">
+        <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+          <div
+            className={`h-full rounded-full transition-all duration-200 ${barClass}`}
+            style={{ width: `${Math.min(ratio, 1) * 100}%` }}
+          />
+        </div>
+        <span
+          className={`whitespace-nowrap text-xs tabular-nums ${colorClass} ${
+            over ? 'font-bold' : 'font-medium'
+          }`}
+        >
+          {count} / {max}
+          {over && <span className="ml-1">({remaining})</span>}
+        </span>
       </div>
-      <span
-        className={`whitespace-nowrap text-xs tabular-nums ${colorClass} ${
-          over ? 'font-bold' : 'font-medium'
-        }`}
-      >
-        {over ? (
-          <>
-            {count} / {max}
-            <span className="ml-1">({remaining})</span>
-          </>
-        ) : (
-          <>
-            {count} / {max}
-          </>
-        )}
-      </span>
+
+      {hasFold && (
+        <p
+          className={`text-[11px] ${
+            pastFold
+              ? 'font-medium text-orange-500 dark:text-orange-400'
+              : 'text-gray-400'
+          }`}
+        >
+          {pastFold
+            ? `Au-delà de ${visible} car., le texte est masqué/tronqué (« voir plus »).`
+            : `Visible avant troncature : ${count} / ${visible} car.`}
+        </p>
+      )}
     </div>
   );
 }
