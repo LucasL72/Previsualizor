@@ -53,7 +53,7 @@ export default function InstagramPreview({ draft, format }) {
           <div className="mt-1 text-sm text-gray-800 dark:text-gray-200">
             <TruncatedText
               text={draft.text}
-              lines={2}
+              foldChars={format.visibleChars}
               usernamePrefix="votre_compte"
             />
           </div>

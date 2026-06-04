@@ -83,7 +83,11 @@ export default function Sidebar({
           rows={10}
           className="w-full resize-y rounded-lg border border-gray-300 bg-white p-3 text-sm text-gray-900 outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100"
         />
-        <CharCounter count={draft.text.length} max={format.maxChars} />
+        <CharCounter
+          count={draft.text.length}
+          max={format.maxChars}
+          visible={format.visibleChars}
+        />
       </div>
 
       {/* Upload d'image */}

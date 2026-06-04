@@ -14,8 +14,6 @@ function Action({ label, icon }) {
 }
 
 export default function LinkedInPreview({ draft, format }) {
-  const isArticle = format.id === 'article';
-
   return (
     <div className="mx-auto w-full max-w-[550px] overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-800 dark:bg-gray-900">
       {/* En-tête */}
@@ -33,10 +31,10 @@ export default function LinkedInPreview({ draft, format }) {
         <span className="ml-auto text-gray-400">···</span>
       </div>
 
-      {/* Texte complet */}
+      {/* Texte (tronqué au pli des 210 caractères) */}
       {draft.text && (
         <div className="px-4 pb-3 text-sm text-gray-800 dark:text-gray-200">
-          <TruncatedText text={draft.text} lines={isArticle ? 4 : 3} />
+          <TruncatedText text={draft.text} foldChars={format.visibleChars} />
         </div>
       )}
 

@@ -26,10 +26,12 @@ export default function PreviewPanel({ platform, format, draft }) {
           <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
             Prévisualisation — {platform.name}
           </h2>
-          <p className="text-xs text-gray-400">
-            {format.name} · {format.width}
-            {format.height ? `×${format.height}` : '×libre'} px ·{' '}
-            {format.maxChars.toLocaleString('fr-FR')} caractères max
+          <p className="truncate text-xs text-gray-400">
+            {format.name} · {format.width}×{format.height} px (
+            {format.ratioLabel}) · {format.maxChars.toLocaleString('fr-FR')}{' '}
+            car. max
+            {format.visibleChars < format.maxChars &&
+              ` · ${format.visibleChars} visibles`}
           </p>
         </div>
         <span

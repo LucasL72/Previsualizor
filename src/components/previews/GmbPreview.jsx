@@ -26,7 +26,7 @@ export default function GmbPreview({ draft, format }) {
       {/* Texte du post */}
       {draft.text && (
         <div className="px-4 py-3 text-sm text-gray-800 dark:text-gray-200">
-          <TruncatedText text={draft.text} lines={3} />
+          <TruncatedText text={draft.text} foldChars={format.visibleChars} />
         </div>
       )}
 
