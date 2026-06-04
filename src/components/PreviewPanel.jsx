@@ -20,9 +20,9 @@ export default function PreviewPanel({ platform, format, draft }) {
   const Preview = PREVIEWS[platform.id] ?? FacebookPreview;
 
   return (
-    <div className="flex h-full flex-col overflow-y-auto bg-gray-100 p-6 scrollbar-thin dark:bg-gray-950">
-      <div className="mb-4 flex items-center justify-between">
-        <div>
+    <div className="flex flex-col bg-gray-100 p-4 scrollbar-thin dark:bg-gray-950 sm:p-6 lg:h-full lg:overflow-y-auto">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+        <div className="min-w-0">
           <h2 className="text-sm font-semibold text-gray-700 dark:text-gray-200">
             Prévisualisation — {platform.name}
           </h2>
