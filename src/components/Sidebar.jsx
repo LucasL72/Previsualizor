@@ -66,7 +66,7 @@ export default function Sidebar({
     });
 
   return (
-    <div className="flex h-full flex-col gap-4 overflow-y-auto p-5 scrollbar-thin">
+    <div className="flex flex-col gap-4 p-5 scrollbar-thin lg:h-full lg:overflow-y-auto">
       {/* Zone de texte */}
       <div className="flex flex-col gap-2">
         <label

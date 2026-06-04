@@ -47,18 +47,18 @@ export default function App() {
   };
 
   return (
-    <div className="flex h-screen flex-col bg-gray-100 dark:bg-gray-950">
+    <div className="flex min-h-screen flex-col bg-gray-100 dark:bg-gray-950 lg:h-screen lg:overflow-hidden">
       {/* Barre supérieure */}
-      <header className="flex shrink-0 items-center justify-between border-b border-gray-200 bg-white px-5 py-3 dark:border-gray-800 dark:bg-gray-900">
-        <div className="flex items-center gap-2">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white">
+      <header className="flex shrink-0 items-center justify-between gap-3 border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-800 dark:bg-gray-900 sm:px-5">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white">
             ◧
           </span>
-          <div>
-            <h1 className="text-base font-bold leading-tight text-gray-900 dark:text-gray-100">
+          <div className="min-w-0">
+            <h1 className="truncate text-base font-bold leading-tight text-gray-900 dark:text-gray-100">
               Previsualizor
             </h1>
-            <p className="text-xs text-gray-400">
+            <p className="hidden truncate text-xs text-gray-400 sm:block">
               Prévisualisation de publications réseaux sociaux
             </p>
           </div>
@@ -67,7 +67,7 @@ export default function App() {
         <button
           type="button"
           onClick={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))}
-          className="flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
+          className="flex shrink-0 items-center gap-2 rounded-lg border border-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 transition hover:bg-gray-100 dark:border-gray-700 dark:text-gray-200 dark:hover:bg-gray-800"
           aria-label="Basculer le mode sombre"
         >
           {theme === 'dark' ? '☀️ Clair' : '🌙 Sombre'}
@@ -77,7 +77,7 @@ export default function App() {
       {/* Deux colonnes 40 / 60 */}
       <main className="flex min-h-0 flex-1 flex-col lg:flex-row">
         {/* Colonne gauche — saisie (40%) */}
-        <section className="flex min-h-0 w-full flex-col border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 lg:w-2/5 lg:border-b-0 lg:border-r">
+        <section className="flex w-full flex-col border-b border-gray-200 bg-white dark:border-gray-800 dark:bg-gray-900 lg:min-h-0 lg:w-2/5 lg:border-b-0 lg:border-r">
           <Sidebar
             draft={draft}
             format={format}
@@ -93,8 +93,8 @@ export default function App() {
         </section>
 
         {/* Colonne droite — prévisualisation (60%) */}
-        <section className="flex min-h-0 w-full flex-col lg:w-3/5">
-          <div className="shrink-0 border-b border-gray-200 bg-white px-6 py-3 dark:border-gray-800 dark:bg-gray-900">
+        <section className="flex w-full flex-col lg:min-h-0 lg:w-3/5">
+          <div className="shrink-0 border-b border-gray-200 bg-white px-4 py-3 dark:border-gray-800 dark:bg-gray-900 sm:px-6">
             <PlatformTabs
               platform={platform}
               format={format}
@@ -102,7 +102,7 @@ export default function App() {
               onFormatChange={(formatId) => update({ formatId })}
             />
           </div>
-          <div className="min-h-0 flex-1">
+          <div className="flex-1 lg:min-h-0">
             <PreviewPanel platform={platform} format={format} draft={draft} />
           </div>
         </section>
